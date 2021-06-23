@@ -6,7 +6,7 @@ class FC2BlogManager {
     /**
      * デフォルトポート番号
      */
-    const DEFAULT_PORT = 80;
+    const DEFAULT_PORT = 443;
     
     /**
      * デフォルトエンコーディング（XML-RPCのエンコード)

@@ -2,9 +2,9 @@
 /*
 Plugin Name: Blog Old Post XML-RPC
 Description: 過去の記事をランダムにXML-RPCに対応した外部ブログに投稿
-Author: @woodroots
-Version: 1.0
-Author URL: http://wood-roots.com
+Author: JunkHack
+Version: 1.1
+Author URL: https://junkhack.gpl.jp/
 */
 
 
@@ -41,10 +41,11 @@ function blog_old_post_submit($title, $text, $endpoint,$user_id,$pass) {
 		$bm->setPassword($pass);
 		$bm->postEntry($title, $text);
 		//ログ用
+		date_default_timezone_set('Asia/Tokyo');
 		$mes .= date( "Y/m/d (D) H:i:s", time() ) . 'に実行されました：<br />' . "\n";
 		$mes .= print_r($bm,true) . "\n";
 	} catch(Exception $e) {
-
+		date_default_timezone_set('Asia/Tokyo');
 		$mes .= date( "Y/m/d (D) H:i:s", time() ) . 'に実行されましたがエラーでした：<br />' . "\n";
 		$mes .= print_r($e,true) . "\n";
 		
@@ -216,15 +217,15 @@ function blog_old_post_setting(){
 			<table class="blog_old_post_table">
 				<tr>
 					<th>ID</th>
-					<td><input name="blog_old_post_settings[1][user_id]" type="text" value="'.htmlspecialchars($val[user_id]).'" /></td>
+					<td><input name="blog_old_post_settings[1][user_id]" type="text" value="'.htmlspecialchars($val['user_id']).'" /></td>
 				</tr>
 				<tr>
 					<th>パスワード</th>
-					<td><input name="blog_old_post_settings[1][pass]" type="text" value="'.htmlspecialchars($val[pass]).'" /></td>
+					<td><input name="blog_old_post_settings[1][pass]" type="text" value="'.htmlspecialchars($val['pass']).'" /></td>
 				</tr>
 				<tr>
 					<th>エンドポイント</th>
-					<td>http://<input name="blog_old_post_settings[1][endpoint]" type="text" value="'.htmlspecialchars($val[endpoint]).'" /></td>
+					<td>https://<input name="blog_old_post_settings[1][endpoint]" type="text" value="'.htmlspecialchars($val['endpoint']).'" /></td>
 				</tr>
 			</table>
 			';
@@ -243,7 +244,7 @@ function blog_old_post_setting(){
 				</tr>
 				<tr>
 					<th>エンドポイント</th>
-					<td>http://<input name="blog_old_post_settings[2][endpoint]" type="text" value="" /></td>
+					<td>https://<input name="blog_old_post_settings[2][endpoint]" type="text" value="" /></td>
 				</tr>
 			</table>
 			';
